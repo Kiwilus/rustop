@@ -5,6 +5,7 @@ Neofetch alternative written in Rust.
 
 ## Features
 
+- System user and hostname
 - OS name
 - Kernel
 - CPU name

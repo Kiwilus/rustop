@@ -8,6 +8,8 @@ fn main() {
     system.refresh_all();
 
     // get informations
+    let username = whoami::realname().unwrap_or_else(|_| "Unknown".to_string());
+    let hostname = whoami::hostname().unwrap_or_else(|_| "Unknown".to_string());
     let os_name  = System::name().unwrap_or("Unknown".to_string());
     let kernel   = System::kernel_version().unwrap_or("Unknown".to_string());
     let cpu_name = system.cpus()[0].brand().to_string();
@@ -24,7 +26,7 @@ fn main() {
         "       ____| '-\\___            ",
         "      /.----.___.-'\\           ",
         "     //        _    \\          ",
-        "    //   .-. (~v~) /|           ",
+        "    //   .-. (~v~) /|          ",
         "   |'|  /\\:  .--  / \\         ",
         "  // |-/  \\_/____/\\/~|        ",
         " |/  \\ |  []_|_|_] \\ |        ",
@@ -43,6 +45,7 @@ fn main() {
 
     let infos = vec![
         format!(""),
+        format!(" [{}@{}]", username.yellow(), hostname.green()),
         format!("OS:        {}", os_name),
         format!("Kernel:    {}", kernel),
         format!("CPU:       {}", cpu_name),
@@ -51,14 +54,14 @@ fn main() {
     ];
 
     // Fallback values for missing rows
-    let leer_ascii = "         ";
-    let leer_info  = "".to_string();
+    let empty_ascii = "         ";
+    let empty_info  = "".to_string();
 
     let max = ascii.len().max(infos.len());
 
     for i in 0..max {
-        let ascii_zeile = ascii.get(i).unwrap_or(&leer_ascii);
-        let info_zeile  = infos.get(i).unwrap_or(&leer_info);
-        println!("{}    {}", ascii_zeile.green(), info_zeile);
+        let ascii_line = ascii.get(i).unwrap_or(&empty_ascii);
+        let info_line  = infos.get(i).unwrap_or(&empty_info);
+        println!("{}    {}", ascii_line.green(), info_line);
     }
 }
