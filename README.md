@@ -1,6 +1,9 @@
-# rustop
+# ferrofetch
 Neofetch alternative written in Rust.
 
+
+Why ferroretch?
+Ferro means iron on latin and iron get's Rusty and the project is written in Rust ;)
 ---
 
 ## Features
@@ -18,11 +21,11 @@ Neofetch alternative written in Rust.
 ## Installation
 1. clone the repo
 ```bash
-git clone https://github.com/Kiwilus/rustop.git
+git clone https://github.com/Kiwilus/ferrofetch.git
 ```
 2. change into the project directory
 ```bash
-cd rustop
+cd ferrofetch
 ```
 3. and install the tool
 ```bash
@@ -30,7 +33,7 @@ cargo install --path .
 ```
 4. then execute with:
 ```bash
-rustop
+ferrofetch
 ```
 
 ## Planned features
