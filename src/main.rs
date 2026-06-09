@@ -10,8 +10,13 @@ fn main() {
     // get informations
     let username = whoami::realname().unwrap_or_else(|_| "Unknown".to_string());
     let hostname = whoami::hostname().unwrap_or_else(|_| "Unknown".to_string());
+
     let os_name  = System::name().unwrap_or("Unknown".to_string());
     let kernel   = System::kernel_version().unwrap_or("Unknown".to_string());
+
+    let uptime_secs = System::uptime();
+    let uptime = format!("{}h {}m", uptime_secs / 3600, uptime_secs % 3600 / 60);
+
     let cpu_name = system.cpus()[0].brand().to_string();
     let ram_total = system.total_memory() / 1024 / 1024;
     let ram_used  = system.used_memory()  / 1024 / 1024;
@@ -27,7 +32,7 @@ fn main() {
         "      /.----.___.-'\\           ",
         "     //        _    \\          ",
         "    //   .-. (~v~) /|          ",
-        "   |'|  /\\:  .--  / \\         ",
+        "   |'|  /\\:  .--  / \\          ",
         "  // |-/  \\_/____/\\/~|        ",
         " |/  \\ |  []_|_|_] \\ |        ",
         " | \\  | \\ |___   _\\ ]_}      ",
@@ -48,6 +53,7 @@ fn main() {
         format!(" [{}@{}]", username.yellow(), hostname.green()),
         format!("OS:        {}", os_name),
         format!("Kernel:    {}", kernel),
+        format!("Uptime:    {}", uptime),
         format!("CPU:       {}", cpu_name),
         format!("RAM:       {} MB / {} MB", ram_used, ram_total),
         format!("Language:  {}", lang)
