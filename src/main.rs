@@ -1,6 +1,7 @@
 use sysinfo::System;
 use owo_colors::OwoColorize;
 use clap::Parser;
+use nvml_wrapper::Nvml;
 
 mod calculate_language;
 mod banners;
@@ -29,6 +30,11 @@ fn get_infos() -> Vec<String> {
     let os_name   = System::name().unwrap_or("Unknown".to_string());
     let kernel    = System::kernel_version().unwrap_or("Unknown".to_string());
     let cpu_name  = system.cpus()[0].brand().to_string();
+
+    let nvml = Nvml::init().unwrap_or_else(|_| panic!("NVML not found"));
+    let device = nvml.device_by_index(0).unwrap();
+    let gpu_name = device.name().unwrap_or("Unknown".to_string());
+
     let ram_total = system.total_memory() / 1024 / 1024;
     let ram_used  = system.used_memory()  / 1024 / 1024;
     let language  = whoami::lang_prefs().unwrap_or_default();
@@ -45,6 +51,7 @@ fn get_infos() -> Vec<String> {
         format!("Kernel:    {}", kernel),
         format!("Uptime:    {}", uptime),
         format!("CPU:       {}", cpu_name),
+        format!("GPU:       {}", gpu_name),
         format!("RAM:       {} MB / {} MB", ram_used, ram_total),
         format!("Language:  {}", lang),
     ]
@@ -63,12 +70,22 @@ fn print_fetch(ascii: &[&str], infos: &[String], color: &str) {
 
         // color based on argument, default color is green
         let colored_line = match color {
-            "red"     => ascii_line.red().to_string(),
-            "blue"    => ascii_line.blue().to_string(),
-            "yellow"  => ascii_line.yellow().to_string(),
-            "magenta" => ascii_line.magenta().to_string(),
-            "cyan"    => ascii_line.cyan().to_string(),
-            _         => ascii_line.green().to_string(),
+            "red"            => ascii_line.red().to_string(),
+            "green"          => ascii_line.green().to_string(),
+            "yellow"         => ascii_line.yellow().to_string(),
+            "blue"           => ascii_line.blue().to_string(),
+            "magenta"        => ascii_line.magenta().to_string(),
+            "cyan"           => ascii_line.cyan().to_string(),
+            "white"          => ascii_line.white().to_string(),
+            "black"          => ascii_line.black().to_string(),
+            "bright_red"     => ascii_line.bright_red().to_string(),
+            "bright_green"   => ascii_line.bright_green().to_string(),
+            "bright_yellow"  => ascii_line.bright_yellow().to_string(),
+            "bright_blue"    => ascii_line.bright_blue().to_string(),
+            "bright_magenta" => ascii_line.bright_magenta().to_string(),
+            "bright_cyan"    => ascii_line.bright_cyan().to_string(),
+            "bright_white"   => ascii_line.bright_white().to_string(),
+            _                => ascii_line.green().to_string(),
         };
 
         println!("{}    {}", colored_line, info_line);
