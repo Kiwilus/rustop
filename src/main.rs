@@ -30,9 +30,6 @@ fn get_infos() -> Vec<String> {
     let os_name   = System::name().unwrap_or("Unknown".to_string());
     let kernel    = System::kernel_version().unwrap_or("Unknown".to_string());
     let cpu_name  = system.cpus()[0].brand().to_string();
-
-    let nvml = Nvml::init().unwrap_or_else(|_| panic!("NVML not found"));
-    let device = nvml.device_by_index(0).unwrap();
     let gpu_name = get_gpu::get_gpu();
 
     let ram_total = system.total_memory() / 1024 / 1024;
