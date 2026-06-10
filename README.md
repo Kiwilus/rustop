@@ -14,6 +14,7 @@ Ferro means iron on latin and iron get's Rusty and the project is written in Rus
 - Kernel
 - System uptime
 - CPU name
+- GPU name
 - RAM (used/total)
 - System language
 - ASCII banners
