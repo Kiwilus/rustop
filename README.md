@@ -35,10 +35,14 @@ cargo install --path .
 ```bash
 ferrofetch
 ```
+## Roadmap
 
-## Planned features
+### Planned features
+
+- configuration in a .config/rustop/rustop.conf file where you can set color/banner manually and forever
+- this structure: user@hostname, OS, Kernel, Uptime, CPU name, GPU, RAM (used/total), Disk usage, local IP adress
+
+### Done things
 
 - Argument parsing with clap and other ASCII banners
 - Argument parsing with clap for the color of the banner
-- configuration in a .config/rustop/rustop.conf file where you can set color/banner manually and forever
-- this structure: user@hostname, OS, Kernel, Uptime, CPU name, GPU, RAM (used/total), Disk usage, local IP adress  
