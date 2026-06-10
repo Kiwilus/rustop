@@ -1,7 +1,6 @@
 use sysinfo::System;
 use owo_colors::OwoColorize;
 use clap::Parser;
-use nvml_wrapper::Nvml;
 
 mod calculate_language;
 mod banners;
