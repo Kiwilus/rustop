@@ -4,6 +4,7 @@ Neofetch alternative written in Rust.
 
 Why ferroretch?
 Ferro means iron on latin and iron get's Rusty and the project is written in Rust ;)
+
 ---
 
 ## Features
@@ -11,10 +12,12 @@ Ferro means iron on latin and iron get's Rusty and the project is written in Rus
 - System user and hostname
 - OS name
 - Kernel
+- System uptime
 - CPU name
 - RAM (used/total)
 - System language
-- batman ASCII banner
+- ASCII banners
+- Adjustable color and different banners with cli arguments
 
 ---
 
@@ -35,6 +38,65 @@ cargo install --path .
 ```bash
 ferrofetch
 ```
+## Quick start
+
+### when you execute ```ferrofetch``` by default it will give you the batman banner and green color.
+
+### you can set the color and the banner when executing ```ferrofetch --banner your_banner_of_choice --color your_color_of_choice```
+
+---
+
+## Available banners and colors
+- ### Available banners:
+- batman(default):
+```
+          .  .
+          |\_|\
+          | a_a\
+          | | "]
+      ____| '-\___
+     /.----.___.-'\
+    //        _    \
+   //   .-. (~v~) /|
+  |'|  /\:  .--  / \
+ // |-/  \_/____/\/~|
+|/  \ |  []_|_|_] \ |
+| \  | \ |___   _\ ]_}
+| |  '-' /   '.'  |
+| |     /    /|:  | 
+| |     |   / |:  /\
+| |     /  /  |  /  \
+| |    |  /  /  |    \
+\ |    |/\/  |/|/\    \
+ \|\ |\|  |  | / /\/\__\
+  \ \| | /   | |__
+       / |   |____)
+       |_/
+
+```
+- dog:
+```
+       / \\__
+      (    @\\___
+      /         O
+     /   (_____/
+    /_____/   U
+```
+
+
+- ### Available colors
+- red
+- green
+- yellow
+- blue
+- magenta
+- cyan
+- white
+- black
+
+
+---
+
 ## Roadmap
 
 ### Planned features
