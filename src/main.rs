@@ -5,6 +5,7 @@ use nvml_wrapper::Nvml;
 
 mod calculate_language;
 mod banners;
+mod get_gpu;
 
 // cli arguments e.g. ferrofetch --banner green
 #[derive(Parser)]
@@ -33,10 +34,11 @@ fn get_infos() -> Vec<String> {
 
     let nvml = Nvml::init().unwrap_or_else(|_| panic!("NVML not found"));
     let device = nvml.device_by_index(0).unwrap();
-    let gpu_name = device.name().unwrap_or("Unknown".to_string());
+    let gpu_name = get_gpu::get_gpu();
 
     let ram_total = system.total_memory() / 1024 / 1024;
     let ram_used  = system.used_memory()  / 1024 / 1024;
+    
     let language  = whoami::lang_prefs().unwrap_or_default();
     let lang      = calculate_language::extract_country(&language.to_string());
 

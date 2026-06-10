@@ -22,6 +22,11 @@ Ferro means iron on latin and iron get's Rusty and the project is written in Rus
 
 ---
 
+## Screenshot
+
+![ferrofetch demo](img/ferrofetch_demo.png)
+---
+
 ## Installation
 1. clone the repo
 ```bash
