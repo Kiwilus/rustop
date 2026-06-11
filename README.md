@@ -140,10 +140,11 @@ ferrofetch
 
 ### Planned features
 
-- configuration in a .config/rustop/rustop.conf file where you can set color/banner manually and forever
-- this structure: user@hostname, OS, Kernel, Uptime, CPU name, GPU, RAM (used/total), local IP adress, Disk usage
+- select ASCII banner directly with path to file
+- configuration via .toml file where you can set color/banner manually and forever
 
 ### Done things
 
 - Argument parsing with clap and other ASCII banners
 - Argument parsing with clap for the color of the banner
+- this structure: user@hostname, OS, Kernel, Uptime, CPU name, GPU, RAM (used/total), local IP adress, Disk usage
