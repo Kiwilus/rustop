@@ -1,3 +1,5 @@
+use std::fs;
+
 pub fn get_banners(name: &str) -> Vec<&'static str> {
     match name {
         "batman" => vec![
@@ -69,7 +71,23 @@ pub fn get_banners(name: &str) -> Vec<&'static str> {
     }
 }
 
+// read file for banner from path
+pub fn get_banner_from_path(path: &str) -> Vec<String> {
+    // try to read the file
+    match fs::read_to_string(path) {
+        Ok(content) => {
+            // format banner
+            content.lines().map(|line| line.to_string()).collect()
+        }
+        Err(_) => {
+            // batman banner default if error
+            println!("Can not load banner from: {}", path);
+            println!("using standart banner (batman)");
+            get_banners("batman").iter().map(|&s| s.to_string()).collect()
+        }
+    }
+}
 // Returns a list of all available banner names
 pub fn list_banners() -> Vec<&'static str> {
-    vec!["batman", "dog"]
+    vec!["batman", "dog", "cat"]
 }

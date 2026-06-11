@@ -18,7 +18,10 @@ struct Args {
     color: String,
 
     #[arg(short, long)]
-    list: bool
+    list: bool,
+
+    #[arg(long)]
+    banner_path: Option<String>
 }
 
 // get system informations
@@ -109,7 +112,6 @@ fn print_fetch(ascii: &[&str], infos: &[String], color: &str) {
 fn main() {
     let args = Args::parse();
 
-    // If --list flag is set, print all banners and exit
     if args.list {
         println!("Available banners:");
         for name in banners::list_banners() {
@@ -118,7 +120,17 @@ fn main() {
         return;
     }
 
-    let ascii = banners::get_banners(&args.banner);
+    let ascii: Vec<String>;
+
+    // check banner path and use the banner file
+    if let Some(path) = args.banner_path {
+        ascii = banners::get_banner_from_path(&path);
+    } else {
+        // logic for build in banners
+        let vec_static = banners::get_banners(&args.banner);
+        ascii = vec_static.iter().map(|&s| s.to_string()).collect();
+    }
+
     let infos = get_infos();
-    print_fetch(&ascii, &infos, &args.color);
+    print_fetch(&ascii.iter().map(|s| s.as_str()).collect::<Vec<&str>>(), &infos, &args.color);
 }
