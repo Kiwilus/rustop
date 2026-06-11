@@ -1,7 +1,7 @@
 use std::net::UdpSocket;
 
 pub fn get_local_ip() -> String {
-    // Wir verbinden uns nicht wirklich, nur um die eigene IP zu ermitteln
+    // we do not really connect, just to get our IP
     let socket = UdpSocket::bind("0.0.0.0:0").ok();
     
     if let Some(sock) = socket {
