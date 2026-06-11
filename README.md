@@ -16,7 +16,8 @@ Ferro means iron on latin and iron get's Rusty and the project is written in Rus
 - CPU name
 - GPU name
 - RAM (used/total)
-- System language
+- local IP Adress
+- Disk Usage with bar
 - ASCII banners
 - Adjustable color and different banners with cli arguments
 
