@@ -2,7 +2,6 @@ use sysinfo::System;
 use owo_colors::OwoColorize;
 use clap::Parser;
 
-mod calculate_language;
 mod banners;
 mod get_gpu;
 mod get_disk_usage;
