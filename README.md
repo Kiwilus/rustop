@@ -47,7 +47,7 @@ ferrofetch
 ```
 ## Quick start
 
-### when you execute ```ferrofetch``` by default it will give you the batman banner and green color.
+### when you execute ```ferrofetch``` by default it will give you the batman banner and white color.
 
 ### you can set the color and the banner when executing ```ferrofetch --banner your_banner_of_choice --color your_color_of_choice```
 
@@ -140,7 +140,7 @@ ferrofetch
 ### Planned features
 
 - configuration in a .config/rustop/rustop.conf file where you can set color/banner manually and forever
-- this structure: user@hostname, OS, Kernel, Uptime, CPU name, GPU, RAM (used/total), Disk usage, local IP adress
+- this structure: user@hostname, OS, Kernel, Uptime, CPU name, GPU, RAM (used/total), local IP adress, Disk usage
 
 ### Done things
 

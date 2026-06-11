@@ -5,6 +5,8 @@ use clap::Parser;
 mod calculate_language;
 mod banners;
 mod get_gpu;
+mod get_disk_usage;
+mod get_local_ip;
 
 // cli arguments e.g. ferrofetch --banner green
 #[derive(Parser)]
@@ -13,7 +15,7 @@ struct Args {
     #[arg(short, long, default_value = "batman")]
     banner: String,
 
-    #[arg(short, long, default_value = "green")]
+    #[arg(short, long, default_value = "white")]
     color: String,
 
     #[arg(short, long)]
@@ -34,25 +36,30 @@ fn get_infos() -> Vec<String> {
 
     let ram_total = system.total_memory() / 1024 / 1024;
     let ram_used  = system.used_memory()  / 1024 / 1024;
-    
-    let language  = whoami::lang_prefs().unwrap_or_default();
-    let lang      = calculate_language::extract_country(&language.to_string());
 
     let uptime_secs = System::uptime();
     let uptime = format!("{}h {}m", uptime_secs / 3600, uptime_secs % 3600 / 60);
 
+    let ip_adress = get_local_ip::get_local_ip();
+
     // Return all infos as a list
-    vec![
+    let mut infos = vec![
         format!(""),
         format!(" [{}@{}]", username.yellow(), hostname.green()),
-        format!("OS:        {}", os_name),
-        format!("Kernel:    {}", kernel),
-        format!("Uptime:    {}", uptime),
-        format!("CPU:       {}", cpu_name),
-        format!("GPU:       {}", gpu_name),
-        format!("RAM:       {} MB / {} MB", ram_used, ram_total),
-        format!("Language:  {}", lang),
-    ]
+        format!("OS:         {}", os_name),
+        format!("Kernel:     {}", kernel),
+        format!("Uptime:     {}", uptime),
+        format!("CPU:        {}", cpu_name),
+        format!("GPU:        {}", gpu_name),
+        format!("RAM:        {} MB / {} MB", ram_used, ram_total),
+        format!("Local IP:   {}", ip_adress),
+        format!("Disk usage: "),
+    ];
+
+    // Add disk lines under infos
+    infos.extend(get_disk_usage::get_disk_usage());
+    infos
+
 }
 
 // print banner and infos side by side
@@ -92,7 +99,7 @@ fn print_fetch(ascii: &[&str], infos: &[String], color: &str) {
             "bright_magenta" => padded_line.bright_magenta().to_string(),
             "bright_cyan"    => padded_line.bright_cyan().to_string(),
             "bright_white"   => padded_line.bright_white().to_string(),
-            _                => padded_line.green().to_string(),
+            _                => padded_line.white().to_string(),
         };
 
         println!("{}    {}", colored_line, info_line);
