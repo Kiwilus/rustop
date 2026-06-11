@@ -20,6 +20,7 @@ Ferro means iron on latin and iron get's Rusty and the project is written in Rus
 - Disk Usage with bar
 - ASCII banners
 - Adjustable color and different banners with cli arguments
+- select banner directly from path in .txt file
 
 ---
 
@@ -140,7 +141,6 @@ ferrofetch
 
 ### Planned features
 
-- select ASCII banner directly with path to file
 - configuration via .toml file where you can set color/banner manually and forever
 
 ### Done things
@@ -148,3 +148,4 @@ ferrofetch
 - Argument parsing with clap and other ASCII banners
 - Argument parsing with clap for the color of the banner
 - this structure: user@hostname, OS, Kernel, Uptime, CPU name, GPU, RAM (used/total), local IP adress, Disk usage
+- select ASCII banner directly with path to file
