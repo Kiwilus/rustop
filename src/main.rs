@@ -1,12 +1,12 @@
 use sysinfo::System;
 use owo_colors::OwoColorize;
 use clap::Parser;
+use local_ip_address::local_ip;
 
 mod banners;
 mod get_gpu;
 mod get_disk_usage;
-mod get_local_ip;
-mod config;        // neu für TOML Config
+mod config;
 
 // cli arguments e.g. ferrofetch --banner green
 #[derive(Parser)]
@@ -43,7 +43,7 @@ fn get_infos() -> Vec<String> {
     let uptime_secs = System::uptime();
     let uptime = format!("{}h {}m", uptime_secs / 3600, uptime_secs % 3600 / 60);
 
-    let ip_adress = get_local_ip::get_local_ip();
+    let ip_adress =  local_ip();
 
     // Return all infos as a list
     let mut infos = vec![
@@ -55,7 +55,7 @@ fn get_infos() -> Vec<String> {
         format!("CPU:        {}", cpu_name),
         format!("GPU:        {}", gpu_name),
         format!("RAM:        {} MB / {} MB", ram_used, ram_total),
-        format!("Local IP:   {}", ip_adress),
+        format!("Local IP:   {:?}", ip_adress),
         format!("Disk usage: "),
     ];
 
@@ -121,10 +121,10 @@ fn main() {
         return;
     }
 
-    // Config aus TOML laden
+    // load config from config.toml
     let cfg = config::load_config();
 
-    // Reihenfolge: CLI Flag > config.toml > Hardcoded Fallback
+    // CLI Flag > config.toml > Hardcoded Fallback
     let banner = args.banner
         .or(cfg.banner)
         .unwrap_or_else(|| "batman".to_string());
