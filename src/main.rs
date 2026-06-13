@@ -6,16 +6,17 @@ mod banners;
 mod get_gpu;
 mod get_disk_usage;
 mod get_local_ip;
+mod config;        // neu für TOML Config
 
 // cli arguments e.g. ferrofetch --banner green
 #[derive(Parser)]
 #[command(name = "ferrofetch", about = "A system fetch tool written in Rust")]
 struct Args {
-    #[arg(short, long, default_value = "batman")]
-    banner: String,
+    #[arg(short, long)]
+    banner: Option<String>,
 
-    #[arg(short, long, default_value = "white")]
-    color: String,
+    #[arg(short, long)]
+    color: Option<String>,
 
     #[arg(short, long)]
     list: bool,
@@ -120,17 +121,31 @@ fn main() {
         return;
     }
 
+    // Config aus TOML laden
+    let cfg = config::load_config();
+
+    // Reihenfolge: CLI Flag > config.toml > Hardcoded Fallback
+    let banner = args.banner
+        .or(cfg.banner)
+        .unwrap_or_else(|| "batman".to_string());
+
+    let color = args.color
+        .or(cfg.color)
+        .unwrap_or_else(|| "white".to_string());
+
+    let banner_path = args.banner_path.or(cfg.banner_path);
+
     let ascii: Vec<String>;
 
     // check banner path and use the banner file
-    if let Some(path) = args.banner_path {
+    if let Some(path) = banner_path {
         ascii = banners::get_banner_from_path(&path);
     } else {
         // logic for build in banners
-        let vec_static = banners::get_banners(&args.banner);
+        let vec_static = banners::get_banners(&banner);
         ascii = vec_static.iter().map(|&s| s.to_string()).collect();
     }
 
     let infos = get_infos();
-    print_fetch(&ascii.iter().map(|s| s.as_str()).collect::<Vec<&str>>(), &infos, &args.color);
+    print_fetch(&ascii.iter().map(|s| s.as_str()).collect::<Vec<&str>>(), &infos, &color);
 }

@@ -9,6 +9,9 @@ owo-colors = "4.3.0"
 os_info = "3.15.0"
 whoami = "2.1.2"
 clap = { version = "4", features = ["derive"] }
+toml = "1.1.2"
+serde = { version = "1", features = ["derive"] }
+dirs = "6.0.0"
 
 [[bin]]
 name = "ferrofetch"
