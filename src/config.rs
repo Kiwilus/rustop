@@ -7,7 +7,6 @@ pub struct Config {
     pub banner: Option<String>,
     pub color: Option<String>,
     pub banner_path: Option<String>,
-    // Hier kannst du später mehr reinpacken (z.B. show_disk: bool, etc.)
 }
 
 pub fn get_config_path() -> PathBuf {
